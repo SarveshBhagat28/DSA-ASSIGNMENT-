@@ -5,7 +5,25 @@ class Node:
         self.right = None
 
 
-# Inorder Traversal
+# Create Library Catalog
+def create_tree():
+    book = input("Enter category (-1 for no category): ")
+
+    if book == "-1":
+        return None
+
+    root = Node(book)
+
+    print("Left category of", book)
+    root.left = create_tree()
+
+    print("Right category of", book)
+    root.right = create_tree()
+
+    return root
+
+
+# Inorder: Left -> Root -> Right
 def inorder(root):
     if root:
         inorder(root.left)
@@ -13,7 +31,7 @@ def inorder(root):
         inorder(root.right)
 
 
-# Preorder Traversal
+# Preorder: Root -> Left -> Right
 def preorder(root):
     if root:
         print(root.book, end=" ")
@@ -21,7 +39,7 @@ def preorder(root):
         preorder(root.right)
 
 
-# Postorder Traversal
+# Postorder: Left -> Right -> Root
 def postorder(root):
     if root:
         postorder(root.left)
@@ -29,24 +47,16 @@ def postorder(root):
         print(root.book, end=" ")
 
 
-# Create Library Catalog Binary Tree
-root = Node("Books")
+# Main Program
+print("===== LIBRARY BOOK CATALOG =====")
 
-root.left = Node("Fiction")
-root.right = Node("Non-Fiction")
+root = create_tree()
 
-root.left.left = Node("Fantasy")
-root.left.right = Node("Mystery")
-
-root.right.left = Node("Science")
-root.right.right = Node("History")
-
-
-print("Inorder Traversal:")
+print("\n----- Inorder Traversal -----")
 inorder(root)
 
-print("\nPreorder Traversal:")
+print("\n----- Preorder Traversal -----")
 preorder(root)
 
-print("\nPostorder Traversal:")
+print("\n----- Postorder Traversal -----")
 postorder(root)
