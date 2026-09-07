@@ -1,37 +1,49 @@
-book_stack = []
+class Stack:
+    def __init__(self):
+        self.TOP = -1
+        self.st = [0] * 100
+
+    def push(self, x):
+        if self.TOP == 99:
+            print("Stack Overflow")
+            return
+
+        self.TOP += 1
+        self.st[self.TOP] = x
+
+    def pop(self):
+        if self.TOP == -1:
+            print("Stack Underflow")
+            return
+
+        x = self.st[self.TOP]
+        self.TOP -= 1
+        return x
+
+
+# Create Stack object
+s = Stack()
 
 while True:
-    print("\n--- Library Book Return System ---")
-    print("1. Return Book")
-    print("2. Process Last Book")
-    print("3. View Stack")
-    print("4. Exit")
+    print("\n1. Push")
+    print("2. Pop")
+    print("3. Exit")
 
-    choice = input("Enter your choice: ")
+    choice = int(input("Enter your choice: "))
 
-    if choice == "1":
-        book = input("Enter book title: ")
-        book_stack.append(book)
-        print(book, "added to stack.")
+    if choice == 1:
+        x = int(input("Enter value: "))
+        s.push(x)
 
-    elif choice == "2":
-        if not book_stack:
-            print("Stack is empty.")
-        else:
-            book = book_stack.pop()
-            print(book, "processed for shelving.")
+    elif choice == 2:
+        x = s.pop()
 
-    elif choice == "3":
-        if not book_stack:
-            print("Stack is empty.")
-        else:
-            print("Books in stack (Top to Bottom):")
-            for book in reversed(book_stack):
-                print(book)
+        if x is not None:
+            print("Popped element:", x)
 
-    elif choice == "4":
-        print("Thank you!")
+    elif choice == 3:
         break
 
     else:
-        print("Invalid choice.")
+        print("Invalid choice")
+       
